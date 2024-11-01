@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Exceptions.ResourceNotFoundException;
+import com.example.demo.data.vo.v1.PersonVO;
 import com.example.demo.models.Person;
 import com.example.demo.repositories.PersonRepository;
 
@@ -15,21 +16,21 @@ public class PersonService {
 	@Autowired
 	PersonRepository repository;
 
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		return repository.findAll();
 	}
 
-	public Person findById(Long id) {
+	public PersonVO findById(Long id) {
 		return repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for these id"));
 	}
 
-	public Person create(Person person) {
+	public PersonVO create(PersonVO PersonVO) {
 		return repository.save(person);
 	}
 
-	public Person update(Person person) {
-		Person entity = repository.findById(person.getId())
+	public PersonVO update(PersonVO person) {
+		PersonVO entity = repository.findById(person.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for these id"));
 		entity.setAdress(person.getAdress());
 		entity.setFirstName(person.getFirstName());
