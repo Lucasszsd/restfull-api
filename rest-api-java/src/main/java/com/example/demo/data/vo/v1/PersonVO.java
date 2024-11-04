@@ -15,15 +15,18 @@ public class PersonVO implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	private String adress;
+	private String address;
 	private String gender;
 
-	public PersonVO(Long id, String firstName, String lastName, String adress, String gender) {
+	public PersonVO(Long id, String firstName, String lastName, String address, String gender) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.adress = adress;
+		this.address = address;
 		this.gender = gender;
+	}
+
+	public PersonVO() {
 	}
 
 	public Long getId() {
@@ -50,12 +53,12 @@ public class PersonVO implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getGender() {
@@ -72,7 +75,7 @@ public class PersonVO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(adress, firstName, gender, id, lastName);
+		return Objects.hash(address, firstName, gender, id, lastName);
 	}
 
 	@Override
@@ -84,7 +87,7 @@ public class PersonVO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PersonVO other = (PersonVO) obj;
-		return Objects.equals(adress, other.adress) && Objects.equals(firstName, other.firstName)
+		return Objects.equals(address, other.address) && Objects.equals(firstName, other.firstName)
 				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
 				&& Objects.equals(lastName, other.lastName);
 	}

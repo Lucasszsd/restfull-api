@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Exceptions.ResourceNotFoundException;
 import com.example.demo.data.vo.v1.PersonVO;
+import com.example.demo.mapper.DozerMapper;
 import com.example.demo.models.Person;
 import com.example.demo.repositories.PersonRepository;
 
@@ -17,26 +18,27 @@ public class PersonService {
 	PersonRepository repository;
 
 	public List<PersonVO> findAll() {
-		return repository.findAll();
+		return DozerMapper.parseListObjects(repository.findAll(),PersonVO.class );
 	}
 
 	public PersonVO findById(Long id) {
-		return repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("No records found for these id"));
+		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for these id"));
+		return DozerMapper.parseObject(entity,PersonVO.class);
 	}
 
-	public PersonVO create(PersonVO PersonVO) {
-		return repository.save(person);
+	public PersonVO create(PersonVO person) {
+		var entity = DozerMapper.parseObject(person, Person.class);
+		return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
 	}
 
 	public PersonVO update(PersonVO person) {
-		PersonVO entity = repository.findById(person.getId())
+		var entity = repository.findById(person.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for these id"));
-		entity.setAdress(person.getAdress());
+		entity.setAddress(person.getAddress());
 		entity.setFirstName(person.getFirstName());
 		entity.setLastName(person.getLastName());
 		entity.setGender(person.getGender());
-		return repository.save(person);
+		return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
 	}
 
 	public void delete(Long id) {
