@@ -3,17 +3,25 @@ package com.example.demo.data.vo.v1;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+@JsonPropertyOrder({"id","address","first_name","last_name","gender"})
 public class PersonVO implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@JsonIgnore
 	private Long id;
+	@JsonProperty("first_name")
 	private String firstName;
+	@JsonProperty("last_name")
 	private String lastName;
 	private String address;
 	private String gender;
@@ -21,7 +29,7 @@ public class PersonVO implements Serializable {
 	public PersonVO(Long id, String firstName, String lastName, String address, String gender) {
 		this.id = id;
 		this.firstName = firstName;
-		this.lastName = lastName;
+ 		this.lastName = lastName;
 		this.address = address;
 		this.gender = gender;
 	}
