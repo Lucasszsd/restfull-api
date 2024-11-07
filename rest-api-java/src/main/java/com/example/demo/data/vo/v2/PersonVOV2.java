@@ -4,24 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.hateoas.RepresentationModel;
 
-public class PersonVOV2 implements Serializable {
+import com.github.dozermapper.core.Mapping;
+
+public class PersonVOV2 extends RepresentationModel<PersonVOV2> implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-	private Long id;
+	@Mapping("id")
+	private Long key;
 	private String firstName;
 	private String lastName;
 	private String address;
 	private String gender;
 	private Date birthDay;
 
-	public PersonVOV2(Long id, String firstName, String lastName, String address, String gender) {
-		this.id = id;
+	public PersonVOV2(Long key, String firstName, String lastName, String address, String gender) {
+		this.key = key;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -31,12 +30,12 @@ public class PersonVOV2 implements Serializable {
 	public PersonVOV2() {
 	}
 
-	public Long getId() {
-		return id;
+	public Long getKey() {
+		return key;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setKey(Long key) {
+		this.key = key;
 	}
 
 	public String getFirstName() {
@@ -71,7 +70,7 @@ public class PersonVOV2 implements Serializable {
 		this.gender = gender;
 	}
 
-	public static long getSerialversionuid() {
+	public static long getSerialversionukey() {
 		return serialVersionUID;
 	}
 
@@ -85,7 +84,7 @@ public class PersonVOV2 implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, firstName, gender, id, lastName);
+		return Objects.hash(address, firstName, gender, key, lastName);
 	}
 
 	@Override
@@ -98,7 +97,7 @@ public class PersonVOV2 implements Serializable {
 			return false;
 		PersonVOV2 other = (PersonVOV2) obj;
 		return Objects.equals(address, other.address) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
+				&& Objects.equals(gender, other.gender) && Objects.equals(key, other.key)
 				&& Objects.equals(lastName, other.lastName);
 	}
 
