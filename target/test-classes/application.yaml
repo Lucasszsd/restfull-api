@@ -3,7 +3,7 @@ cors:
 security:
  jwt:
   token:
-   secret-key: ht78ik
+   secret-key: pbkdf2
    expire-length: 3600000
 server:
  port: 8888
